@@ -6,19 +6,20 @@ from pydantic import BaseModel, Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
-class AppYamlConfig(BaseModel):
+class BotYamlConfig(BaseModel):
     name: str
+    address_keywords: list
 
 
 class AiYamlConfig(BaseModel):
-    chat_system_promt: str
+    chat_system_prompt: str
     chat_model: str
     temperature: float
     max_tokens: int
 
 
 class YamlConfig(BaseModel):
-    app: AppYamlConfig
+    bot: BotYamlConfig
     ai: AiYamlConfig
 
 
@@ -51,8 +52,8 @@ class Config:
         return YamlConfig(**data)
 
     @property
-    def app(self) -> AppYamlConfig:
-        return self._yaml_config.app
+    def bot(self) -> BotYamlConfig:
+        return self._yaml_config.bot
     
     @property
     def ai(self) -> AiYamlConfig:
