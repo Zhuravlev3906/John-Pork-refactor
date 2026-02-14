@@ -1,3 +1,5 @@
+import os
+import base64
 from openai import AsyncOpenAI, APIError
 from core.logger import app_logger
 
@@ -23,3 +25,27 @@ class AIManager:
         
         except APIError as e:
             app_logger.error(f"ProxyAPI Error. Chat response: {e}")
+    
+    async def edit_image(self, user_prompt: str, model: str, system_instruction: str, size: str, quality: str, reference_image: str = "assets/pig.jpg"):
+        if not os.path.exists(reference_image):
+            app_logger.error(f"File {reference_image} not exists.")
+
+        prompt = (
+            f"{system_instruction}"
+            f"{user_prompt}"
+        )
+
+        with open(reference_image, "rb") as ref_img:
+            try:
+                response = await self._client.images.edit(
+                    model=model,
+                    image=ref_img,
+                    prompt=prompt,
+                    size=size,
+                    quality=quality
+                )
+
+                return base64.b64decode(response.data[0].b64_json)
+
+            except APIError as e:
+                app_logger.error(f"ProxyAPI Error. Chat response: {e}")
