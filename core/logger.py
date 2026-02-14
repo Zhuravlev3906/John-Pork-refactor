@@ -4,7 +4,6 @@ from loguru import logger
 
 
 class LoggerSetup:
-
     _instance = None
 
     def __new__(cls, *args, **kwargs):
