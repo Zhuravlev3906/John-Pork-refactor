@@ -1,0 +1,25 @@
+ru:
+  start: start command
+  edit_pig_start: edit pig start
+  edit_pig_process: edit pig process
+  edit_pig_cancel: edit pig cancel
+  edit_pig_error: edit pig error
+  edit_pig_done: edit pig done
+  swap_face_start: swap face start
+  swap_face_process: swap face process
+  swap_face_cancel: swap face cancel
+  swap_face_error: swap face error
+  swap_face_done: swap face done
+
+en:
+  start: start command en
+  edit_pig_start: edit pig start
+  edit_pig_process: edit pig process
+  edit_pig_cancel: edit pig cancel
+  edit_pig_error: edit pig error
+  edit_pig_done: edit pig done
+  swap_face_start: swap face start
+  swap_face_process: swap face process
+  swap_face_cancel: swap face cancel
+  swap_face_error: swap face error
+  swap_face_done: swap face done
