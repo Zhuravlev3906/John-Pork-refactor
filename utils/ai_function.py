@@ -1,4 +1,5 @@
 import os
+import io
 import base64
 from openai import AsyncOpenAI, APIError
 from core.logger import app_logger
@@ -26,7 +27,7 @@ class AIManager:
         except APIError as e:
             app_logger.error(f"ProxyAPI Error. Chat response: {e}")
     
-    async def edit_image(self, user_prompt: str, model: str, system_instruction: str, size: str, quality: str, reference_image: str = "assets/pig.jpg"):
+    async def edit_image(self, user_prompt: str, system_instruction: str, model: str, size: str, quality: str, reference_image: str = "assets/pig.jpg"):
         if not os.path.exists(reference_image):
             app_logger.error(f"File {reference_image} not exists.")
 
@@ -48,4 +49,23 @@ class AIManager:
                 return base64.b64decode(response.data[0].b64_json)
 
             except APIError as e:
-                app_logger.error(f"ProxyAPI Error. Chat response: {e}")
+                app_logger.error(f"ProxyAPI Error. Edit image: {e}")
+    
+    async def face_swap(self, human_face: bytes, system_instruction: str, model: str, size: str, quality: str, reference_image: str = "assets/pig.jpg"):
+        with open(reference_image, "rb") as ref_img:
+            human_image = io.BytesIO(human_face)
+            human_image.name = "human.jpg"
+
+            try:
+                response = await self._client.images.edit(
+                    model=model,
+                    image=[ref_img, human_image],
+                    prompt=system_instruction,
+                    size=size,
+                    quality=quality
+                )
+
+                return base64.b64decode(response.data[0].b64_json)
+
+            except APIError as e:
+                app_logger.error(f"ProxyAPI Error. Face swap: {e}")

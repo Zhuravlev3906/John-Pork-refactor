@@ -72,7 +72,13 @@ bot:
     - "салам джон"
 
 ai:
-  chat_system_prompt: "System prompt"
   chat_model: "gpt-4.1"
+  chat_system_prompt: "System prompt"
   temperature: 0.8
   max_tokens: 500
+  edit_image_system_prompt: "Edit Image system prompt"
+  face_swap_system_prompt: "Face Swap system prompt"
+  image_model: "gpt-image-1"
+  image_size: "1024x1024"
+  quality: "medium"
+  reference_image: "assets/pig.jpg"

@@ -12,10 +12,16 @@ class BotYamlConfig(BaseModel):
 
 
 class AiYamlConfig(BaseModel):
-    chat_system_prompt: str
     chat_model: str
+    chat_system_prompt: str
     temperature: float
     max_tokens: int
+    edit_image_system_prompt: str
+    face_swap_system_prompt: str
+    image_model: str
+    image_size: str
+    quality: str
+    reference_image: str
 
 
 class YamlConfig(BaseModel):
