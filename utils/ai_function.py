@@ -1,6 +1,7 @@
 import os
 import io
 import base64
+import aiofiles
 from openai import AsyncOpenAI, APIError
 from core.logger import app_logger
 
@@ -36,36 +37,47 @@ class AIManager:
             f"{user_prompt}"
         )
 
-        with open(reference_image, "rb") as ref_img:
-            try:
-                response = await self._client.images.edit(
-                    model=model,
-                    image=ref_img,
-                    prompt=prompt,
-                    size=size,
-                    quality=quality
-                )
+        try:
+            async with aiofiles.open(reference_image, "rb") as f:
+                ref_img_bytes = await f.read()
 
-                return base64.b64decode(response.data[0].b64_json)
+            response = await self._client.images.edit(
+                model=model,
+                image=ref_img_bytes,
+                prompt=prompt,
+                size=size,
+                quality=quality
+            )
 
-            except APIError as e:
-                app_logger.error(f"ProxyAPI Error. Edit image: {e}")
+            return base64.b64decode(response.data[0].b64_json)
+
+        except APIError as e:
+            app_logger.error(f"ProxyAPI Error. Edit image: {e}")
+        except Exception as e:
+            app_logger.error(f"Error reading file or processing image: {e}")
     
     async def face_swap(self, human_face: bytes, system_instruction: str, model: str, size: str, quality: str, reference_image: str = "assets/pig.jpg"):
-        with open(reference_image, "rb") as ref_img:
+        try:
+            async with aiofiles.open(reference_image, "rb") as f:
+                ref_img_bytes = await f.read()
+            
+            ref_img_io = io.BytesIO(ref_img_bytes)
+            ref_img_io.name = os.path.basename(reference_image)
+
             human_image = io.BytesIO(human_face)
             human_image.name = "human.jpg"
 
-            try:
-                response = await self._client.images.edit(
-                    model=model,
-                    image=[ref_img, human_image],
-                    prompt=system_instruction,
-                    size=size,
-                    quality=quality
-                )
+            response = await self._client.images.edit(
+                model=model,
+                image=[ref_img_io, human_image],
+                prompt=system_instruction,
+                size=size,
+                quality=quality
+            )
 
-                return base64.b64decode(response.data[0].b64_json)
+            return base64.b64decode(response.data[0].b64_json)
 
-            except APIError as e:
-                app_logger.error(f"ProxyAPI Error. Face swap: {e}")
+        except APIError as e:
+            app_logger.error(f"ProxyAPI Error. Face swap: {e}")
+        except Exception as e:
+            app_logger.error(f"Error reading file or processing face swap: {e}")
