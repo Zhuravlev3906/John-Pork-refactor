@@ -8,6 +8,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class BotYamlConfig(BaseModel):
     name: str
+    main_group_url: str
     address_keywords: list
 
 

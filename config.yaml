@@ -1,5 +1,6 @@
 bot:
   name: "John Pork"
+  main_group_url: "https://t.me/telegram"
   address_keywords:
     - "джон"
     - "джони"

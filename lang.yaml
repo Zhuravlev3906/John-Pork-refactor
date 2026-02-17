@@ -1,5 +1,5 @@
 ru:
-  start: start command
+  start: "Привет! Я Джон Порк 🐷\nЯ могу отвечать на вопросы и обрабатывать фото.\n\nЖми кнопку ниже, чтобы вступить в главную группу!"
   edit_pig_start: edit pig start
   edit_pig_process: edit pig process
   edit_pig_cancel: edit pig cancel
@@ -16,9 +16,10 @@ ru:
   lang_set_success: "Язык успешно изменен на Русский"
   error_private_needed: "Пожалуйста, запустите бота в личных сообщениях."
   error_change_lang: "Ошибка при смене языка"
+  btn_main_group: "Вступить в группу"
 
 en:
-  start: start command en
+  start: "Hello! I am John Pork 🐷\nI can answer questions and edit photos.\n\nClick the button below to join the main group!"
   edit_pig_start: edit pig start
   edit_pig_process: edit pig process
   edit_pig_cancel: edit pig cancel
@@ -35,3 +36,4 @@ en:
   lang_set_success: "Language successfully set to English"
   error_private_needed: "Please start the bot in private chat first."
   error_change_lang: "Error changing language"
+  btn_main_group: "Join Group"

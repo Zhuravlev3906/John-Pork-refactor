@@ -15,6 +15,7 @@ from core.config_manager import Config
 from core.database import init_db
 from core.middleware import set_language_context
 from handlers.language import lang_command, lang_callback
+from handlers.start import start_command
 
 async def post_init(application: Application) -> None:
     await init_db()
@@ -38,6 +39,7 @@ def main():
 
     application.add_handler(TypeHandler(Update, set_language_context), group=-1)
 
+    application.add_handler(CommandHandler("start", start_command))
     application.add_handler(CommandHandler("lang", lang_command))
     application.add_handler(CallbackQueryHandler(lang_callback, pattern="^set_lang_"))
 
@@ -46,7 +48,10 @@ def main():
     application.run_polling(drop_pending_updates=True)
 
 if __name__ == "__main__":
-    try:            
+    try:
+        if sys.platform == 'win32':
+            asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+            
         main()
     except KeyboardInterrupt:
         logger.info("Bot stopped by user")

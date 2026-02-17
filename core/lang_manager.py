@@ -22,6 +22,7 @@ class RuYamlLangModel(BaseModel):
     lang_set_success: str
     error_private_needed: str
     error_change_lang: str
+    btn_main_group: str
 
 class EnYamlLangModel(BaseModel):
     start: str
@@ -41,6 +42,7 @@ class EnYamlLangModel(BaseModel):
     lang_set_success: str
     error_private_needed: str
     error_change_lang: str
+    btn_main_group: str
 
 class YamlLangModel(BaseModel):
     ru: RuYamlLangModel
