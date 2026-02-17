@@ -10,6 +10,12 @@ ru:
   swap_face_cancel: swap face cancel
   swap_face_error: swap face error
   swap_face_done: swap face done
+  menu_choose_language: "Выберите язык"
+  btn_ru: "🇷🇺 Русский"
+  btn_en: "🇺🇸 English"
+  lang_set_success: "Язык успешно изменен на Русский"
+  error_private_needed: "Пожалуйста, запустите бота в личных сообщениях."
+  error_change_lang: "Ошибка при смене языка"
 
 en:
   start: start command en
@@ -23,3 +29,9 @@ en:
   swap_face_cancel: swap face cancel
   swap_face_error: swap face error
   swap_face_done: swap face done
+  menu_choose_language: "Choose Language"
+  btn_ru: "🇷🇺 Русский"
+  btn_en: "🇺🇸 English"
+  lang_set_success: "Language successfully set to English"
+  error_private_needed: "Please start the bot in private chat first."
+  error_change_lang: "Error changing language"
