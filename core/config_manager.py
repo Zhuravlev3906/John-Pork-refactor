@@ -38,7 +38,6 @@ class EnvConfig(BaseSettings):
     )
 
     telegram_bot_token: str = Field(alias="TELEGRAM_BOT_TOKEN")
-    openai_api_key: str = Field(alias="OPENAI_API_KEY")
     proxy_api_key: str = Field(alias="PROXYAPI_API_KEY")
 
 
@@ -69,10 +68,6 @@ class Config:
     @property
     def telegram_bot_token(self) -> str:
         return self._env_config.telegram_bot_token
-    
-    @property
-    def openai_api_key(self) -> str:
-        return self._env_config.openai_api_key
     
     @property
     def proxy_api_key(self) -> str:
