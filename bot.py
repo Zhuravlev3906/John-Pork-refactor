@@ -7,7 +7,9 @@ from telegram.ext import (
     ApplicationBuilder, 
     CommandHandler, 
     CallbackQueryHandler, 
-    TypeHandler
+    MessageHandler,
+    TypeHandler,
+    filters
 )
 from loguru import logger
 
@@ -16,12 +18,13 @@ from core.database import init_db
 from core.middleware import set_language_context
 from handlers.language import lang_command, lang_callback
 from handlers.start import start_command
+from handlers.chat import chat_message_handler
 
 async def post_init(application: Application) -> None:
     await init_db()
     logger.info("Post-init actions completed.")
 
-def main():
+def main() -> None:
     logger.info("Starting Bot...")
 
     config = Config()
@@ -42,6 +45,8 @@ def main():
     application.add_handler(CommandHandler("start", start_command))
     application.add_handler(CommandHandler("lang", lang_command))
     application.add_handler(CallbackQueryHandler(lang_callback, pattern="^set_lang_"))
+    
+    application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, chat_message_handler))
 
     logger.info("Bot is running polling...")
     
