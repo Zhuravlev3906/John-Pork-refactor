@@ -25,25 +25,25 @@ async def chat_message_handler(update: Update, context: ContextTypes.DEFAULT_TYP
     is_addressed = False
 
     if chat_type == "private":
+        return
+    
+    is_reply_to_bot = (
+        update.message.reply_to_message 
+        and update.message.reply_to_message.from_user.id == bot_user.id
+    )
+    has_mention = f"@{bot_username}" in text
+    
+    if is_reply_to_bot or has_mention:
         is_addressed = True
     else:
-        is_reply_to_bot = (
-            update.message.reply_to_message 
-            and update.message.reply_to_message.from_user.id == bot_user.id
-        )
-        has_mention = f"@{bot_username}" in text
-        
-        if is_reply_to_bot or has_mention:
+        detector = BotAddressDetector(keywords=config.bot.address_keywords)
+        if detector.is_addressing(text):
             is_addressed = True
-        else:
-            detector = BotAddressDetector(keywords=config.bot.address_keywords)
-            if detector.is_addressing(text):
-                is_addressed = True
 
     system_prompt = config.ai.chat_system_prompt
 
     if not is_addressed:
-        if chat_type == "private" or len(text.split()) < 3:
+        if len(text.split()) < 3:
             return
 
         text_lower = text.lower()
