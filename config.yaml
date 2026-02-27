@@ -136,7 +136,7 @@ ai:
   temperature: 0.8
   max_tokens: 150
   edit_image_system_prompt: "Edit Image system prompt"
-  face_swap_system_prompt: "Face Swap system prompt"
+  face_swap_system_prompt: "Perform a seamless, high-fidelity face swap replacing the human face in the target image with the pig face from the source image. Morph the anatomical structure to fit the pig's snout and facial features, while strictly preserving the human's original silhouette, hair, facial hair, glasses, tattoos, piercings, and any other accessories. The inserted pig face must perfectly adapt to the original lighting, shadows, skin tone blending, head orientation, and facial expression of the human target. Maintain the exact original background and environmental context. The final image should look like a highly photorealistic, cohesive humanoid pig without any visible blending artifacts."
   image_model: "gpt-image-1"
   image_size: "1024x1024"
   quality: "medium"

@@ -9,6 +9,7 @@ from telegram.ext import (
     CallbackQueryHandler, 
     MessageHandler,
     TypeHandler,
+    ConversationHandler,
     filters
 )
 from loguru import logger
@@ -19,6 +20,7 @@ from core.middleware import set_language_context
 from handlers.language import lang_command, lang_callback
 from handlers.start import start_command
 from handlers.chat import chat_message_handler
+from handlers.porkify import porkify_start, porkify_receive_photo, porkify_cancel, WAIT_PHOTO
 
 async def post_init(application: Application) -> None:
     await init_db()
@@ -46,6 +48,16 @@ def main() -> None:
     application.add_handler(CommandHandler("lang", lang_command))
     application.add_handler(CallbackQueryHandler(lang_callback, pattern="^set_lang_"))
     
+    porkify_conv_handler = ConversationHandler(
+        entry_points=[CommandHandler("porkify", porkify_start)],
+        states={
+            WAIT_PHOTO: [MessageHandler(filters.PHOTO, porkify_receive_photo)]
+        },
+        fallbacks=[CommandHandler("cancel", porkify_cancel)],
+        allow_reentry=True
+    )
+    application.add_handler(porkify_conv_handler)
+
     application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, chat_message_handler))
 
     logger.info("Bot is running polling...")
