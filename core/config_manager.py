@@ -9,12 +9,17 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class BotYamlConfig(BaseModel):
     name: str
     main_group_url: str
-    address_keywords: list
+    address_keywords: list[str]
+    eavesdrop_cooldown: int
+    eavesdrop_chance: int
+    eavesdrop_finance_triggers: list[str]
+    eavesdrop_aggression_triggers: list[str]
 
 
 class AiYamlConfig(BaseModel):
     chat_model: str
     chat_system_prompt: str
+    eavesdrop_system_prompt: str
     temperature: float
     max_tokens: int
     edit_image_system_prompt: str
