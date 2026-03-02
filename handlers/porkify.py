@@ -1,4 +1,4 @@
-from telegram import Update
+from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.constants import ChatAction
 from telegram.ext import ContextTypes, ConversationHandler
 
@@ -20,7 +20,10 @@ async def porkify_start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> i
         await _process_and_send_porkify(update, context, photo_file_id)
         return ConversationHandler.END
 
-    await update.message.reply_text(texts.swap_face_start)
+    keyboard = [[InlineKeyboardButton(texts.cancel_button, callback_data="porkify_cancel")]]
+    reply_markup = InlineKeyboardMarkup(keyboard)
+
+    await update.message.reply_text(texts.swap_face_start, reply_markup=reply_markup)
     return WAIT_PHOTO
 
 
@@ -31,6 +34,18 @@ async def porkify_receive_photo(update: Update, context: ContextTypes.DEFAULT_TY
     photo_file_id = update.message.photo[-1].file_id
     await _process_and_send_porkify(update, context, photo_file_id)
     
+    return ConversationHandler.END
+
+
+async def porkify_cancel_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    query = update.callback_query
+    await query.answer()
+    
+    lang_code = context.user_data.get("language", "en")
+    lang_manager = LangManager()
+    texts = getattr(lang_manager, lang_code)
+    
+    await query.edit_message_text(texts.swap_face_cancel)
     return ConversationHandler.END
 
 

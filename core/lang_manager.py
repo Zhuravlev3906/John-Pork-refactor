@@ -16,6 +16,7 @@ class RuYamlLangModel(BaseModel):
     swap_face_cancel: str
     swap_face_error: str
     swap_face_done: str
+    cancel_button: str
     menu_choose_language: str
     btn_ru: str
     btn_en: str
@@ -36,6 +37,7 @@ class EnYamlLangModel(BaseModel):
     swap_face_cancel: str
     swap_face_error: str
     swap_face_done: str
+    cancel_button: str
     menu_choose_language: str
     btn_ru: str
     btn_en: str

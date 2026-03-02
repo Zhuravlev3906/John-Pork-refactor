@@ -1,39 +1,41 @@
 ru:
   start: "Привет! Я Джон Порк 🐷\nЯ могу отвечать на вопросы и обрабатывать фото.\n\nЖми кнопку ниже, чтобы вступить в главную группу!"
-  edit_pig_start: edit pig start
-  edit_pig_process: edit pig process
-  edit_pig_cancel: edit pig cancel
-  edit_pig_error: edit pig error
-  edit_pig_done: edit pig done
-  swap_face_start: swap face start
-  swap_face_process: swap face process
-  swap_face_cancel: swap face cancel
-  swap_face_error: swap face error
-  swap_face_done: swap face done
+  btn_main_group: "Вступить в группу"
   menu_choose_language: "Выберите язык"
   btn_ru: "🇷🇺 Русский"
   btn_en: "🇺🇸 English"
   lang_set_success: "Язык успешно изменен на Русский"
   error_private_needed: "Пожалуйста, запустите бота в личных сообщениях."
   error_change_lang: "Ошибка при смене языка"
-  btn_main_group: "Вступить в группу"
+  edit_pig_start: "edit pig start"
+  edit_pig_process: "edit pig process"
+  edit_pig_cancel: "edit pig cancel"
+  edit_pig_error: "edit pig error"
+  edit_pig_done: "edit pig done"
+  swap_face_start: "swap face start"
+  swap_face_process: "swap face process"
+  swap_face_cancel: "swap face cancel"
+  swap_face_error: "swap face error"
+  swap_face_done: "swap face done"
+  cancel_button: "❌ Отмена"
 
 en:
   start: "Hello! I am John Pork 🐷\nI can answer questions and edit photos.\n\nClick the button below to join the main group!"
-  edit_pig_start: edit pig start
-  edit_pig_process: edit pig process
-  edit_pig_cancel: edit pig cancel
-  edit_pig_error: edit pig error
-  edit_pig_done: edit pig done
-  swap_face_start: swap face start
-  swap_face_process: swap face process
-  swap_face_cancel: swap face cancel
-  swap_face_error: swap face error
-  swap_face_done: swap face done
+  btn_main_group: "Join Group"
   menu_choose_language: "Choose Language"
   btn_ru: "🇷🇺 Русский"
   btn_en: "🇺🇸 English"
   lang_set_success: "Language successfully set to English"
   error_private_needed: "Please start the bot in private chat first."
   error_change_lang: "Error changing language"
-  btn_main_group: "Join Group"
+  edit_pig_start: "edit pig start"
+  edit_pig_process: "edit pig process"
+  edit_pig_cancel: "edit pig cancel"
+  edit_pig_error: "edit pig error"
+  edit_pig_done: "edit pig done"
+  swap_face_start: "swap face start"
+  swap_face_process: "swap face process"
+  swap_face_cancel: "swap face cancel"
+  swap_face_error: "swap face error"
+  swap_face_done: "swap face done"
+  cancel_button: "❌ Cancel"

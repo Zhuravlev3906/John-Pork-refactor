@@ -20,7 +20,7 @@ from core.middleware import set_language_context
 from handlers.language import lang_command, lang_callback
 from handlers.start import start_command
 from handlers.chat import chat_message_handler
-from handlers.porkify import porkify_start, porkify_receive_photo, porkify_cancel, WAIT_PHOTO
+from handlers.porkify import porkify_start, porkify_receive_photo, porkify_cancel, porkify_cancel_callback, WAIT_PHOTO
 
 async def post_init(application: Application) -> None:
     await init_db()
@@ -51,7 +51,10 @@ def main() -> None:
     porkify_conv_handler = ConversationHandler(
         entry_points=[CommandHandler("porkify", porkify_start)],
         states={
-            WAIT_PHOTO: [MessageHandler(filters.PHOTO, porkify_receive_photo)]
+            WAIT_PHOTO: [
+                MessageHandler(filters.PHOTO, porkify_receive_photo),
+                CallbackQueryHandler(porkify_cancel_callback, pattern="^porkify_cancel$")
+            ]
         },
         fallbacks=[CommandHandler("cancel", porkify_cancel)],
         allow_reentry=True
@@ -66,9 +69,6 @@ def main() -> None:
 
 if __name__ == "__main__":
     try:
-        if sys.platform == 'win32':
-            asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
-            
         main()
     except KeyboardInterrupt:
         logger.info("Bot stopped by user")

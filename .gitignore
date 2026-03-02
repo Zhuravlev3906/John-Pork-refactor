@@ -12,3 +12,5 @@ wheels/
 .env
 logs/*
 bot.db
+
+GEMINI.md
