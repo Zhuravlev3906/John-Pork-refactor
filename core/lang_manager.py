@@ -24,6 +24,10 @@ class RuYamlLangModel(BaseModel):
     error_private_needed: str
     error_change_lang: str
     btn_main_group: str
+    lucky_start: str
+    lucky_win: str
+    lucky_loss: str
+    lucky_btn: str
 
 class EnYamlLangModel(BaseModel):
     start: str
@@ -45,6 +49,10 @@ class EnYamlLangModel(BaseModel):
     error_private_needed: str
     error_change_lang: str
     btn_main_group: str
+    lucky_start: str
+    lucky_win: str
+    lucky_loss: str
+    lucky_btn: str
 
 class YamlLangModel(BaseModel):
     ru: RuYamlLangModel

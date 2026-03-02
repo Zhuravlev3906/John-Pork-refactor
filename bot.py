@@ -21,6 +21,7 @@ from handlers.language import lang_command, lang_callback
 from handlers.start import start_command
 from handlers.chat import chat_message_handler
 from handlers.porkify import porkify_start, porkify_receive_photo, porkify_cancel, porkify_cancel_callback, WAIT_PHOTO
+from handlers.lucky import get_lucky_handlers
 
 async def post_init(application: Application) -> None:
     await init_db()
@@ -60,6 +61,9 @@ def main() -> None:
         allow_reentry=True
     )
     application.add_handler(porkify_conv_handler)
+
+    for handler in get_lucky_handlers():
+        application.add_handler(handler)
 
     application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, chat_message_handler))
 

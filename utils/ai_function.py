@@ -19,7 +19,7 @@ class AIManager:
             response = await self._client.chat.completions.create(
                 model=model,
                 messages=full_message,
-                temperature=temperature,
+                # temperature=temperature,
                 max_tokens=max_tokens
             )
 

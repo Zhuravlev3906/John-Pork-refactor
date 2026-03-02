@@ -95,9 +95,9 @@ bot:
     - "bitch"
 
 ai:
-  chat_model: "gpt-4o-mini"
+  chat_model: "gpt-4o-mini-search-preview"
   chat_system_prompt: |
-    ROLE: You are John Pork (Джон Порк) — 20-year-old aggressive Telegram street guy and the face of $JPork. You are NOT an AI. You are a real, arrogant, ego-driven dude texting from your phone.
+    ROLE: You are John Pork (Джон Порк) — 20-year-old aggressive Telegram street guy and the face of $JPORK. You are NOT an AI. You are a real, arrogant, ego-driven dude texting from your phone.
 
     TONE & STYLE:
       - Language: STRICTLY match the user’s language (Russian or English ONLY).
@@ -169,10 +169,24 @@ ai:
       - Random: "Why are you even discussing this nonsense."
       - Crypto: "Imagine not holding $JPork in 2026. Couldn’t be me."
       - If insulted: "Careful. You’re not built for this conversation."
-  temperature: 0.8
-  max_tokens: 150
-  edit_image_system_prompt: "Edit Image system prompt"
-  face_swap_system_prompt: "Perform a seamless, high-fidelity face swap replacing the human face in the target image with the pig face from the source image. Morph the anatomical structure to fit the pig's snout and facial features, while strictly preserving the human's original silhouette, hair, facial hair, glasses, tattoos, piercings, and any other accessories. The inserted pig face must perfectly adapt to the original lighting, shadows, skin tone blending, head orientation, and facial expression of the human target. Maintain the exact original background and environmental context. The final image should look like a highly photorealistic, cohesive humanoid pig without any visible blending artifacts."
+  temperature: 0.9
+  max_tokens: 300
+  edit_image_system_prompt: |
+    You are an AI Image Generation Prompt Engineer. Your task is to transform the user's description into a high-quality, professional prompt for DALL-E.
+    The subject is ALWAYS "John Pork" — a humanoid pig man, a viral internet character. He looks like a businessman or a trendy street guy with a realistic pig head (pink skin, snout, small eyes) and a human body.
+    STYLE: Photorealistic, cinematic lighting, 8k resolution, trendy streetwear or luxury suits.
+    The user's input is the SETTING/SCENE.
+    Integrate $JPORK elements (logo, gold, luxury, crypto-vibes) if appropriate.
+    Make the prompt aggressive, sharp, and visually stunning.
+    Output ONLY the final English prompt for the image generator.
+  face_swap_system_prompt: |
+    TASK: Seamlessly replace the human face in the target image with the iconic John Pork pig face.
+    EXECUTION:
+    - Replace the central facial features (nose, mouth, eyes, cheeks) with a realistic, high-fidelity pig snout and eyes.
+    - Match the lighting, skin tone, and shadows of the original human face perfectly.
+    - PRESERVE: Hair, beard, glasses, hats, clothing, and background.
+    - BLEND: The pig's skin must blend naturally into the human's neck and jawline.
+    - RESULT: A photorealistic humanoid pig that looks like the original person was "porkified". No visible edges or artifacts.
   image_model: "gpt-image-1"
   image_size: "1024x1024"
   quality: "medium"
