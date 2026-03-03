@@ -10,8 +10,7 @@ from core.logger import logger
 lang_manager = LangManager("lang.yaml")
 
 async def send_lang_menu(user_id: int, context: ContextTypes.DEFAULT_TYPE, chat_id: int = None):
-    current_lang_code = await get_user_language(user_id, "en")
-    lang_model = getattr(lang_manager, current_lang_code, lang_manager.en)
+    lang_model = context.lang
 
     keyboard = [
         [

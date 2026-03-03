@@ -1,5 +1,5 @@
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
-from telegram.constants import ChatAction
+from telegram.constants import ChatAction, ChatType
 from telegram.ext import ContextTypes, ConversationHandler
 
 from core.config_manager import Config
@@ -10,9 +10,11 @@ from utils.ai_function import AIManager
 WAIT_PHOTO = 1
 
 async def porkify_start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-    lang_code = context.user_data.get("language", "en")
-    lang_manager = LangManager()
-    texts = getattr(lang_manager, lang_code)
+    texts = context.lang
+    
+    if update.effective_chat.type == ChatType.PRIVATE:
+        await update.message.reply_text(texts.error_group_needed)
+        return ConversationHandler.END
     
     reply_msg = update.message.reply_to_message
     if reply_msg and reply_msg.photo:
@@ -41,27 +43,21 @@ async def porkify_cancel_callback(update: Update, context: ContextTypes.DEFAULT_
     query = update.callback_query
     await query.answer()
     
-    lang_code = context.user_data.get("language", "en")
-    lang_manager = LangManager()
-    texts = getattr(lang_manager, lang_code)
+    texts = context.lang
     
     await query.edit_message_text(texts.swap_face_cancel)
     return ConversationHandler.END
 
 
 async def porkify_cancel(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-    lang_code = context.user_data.get("language", "en")
-    lang_manager = LangManager()
-    texts = getattr(lang_manager, lang_code)
+    texts = context.lang
     
     await update.message.reply_text(texts.swap_face_cancel)
     return ConversationHandler.END
 
 
 async def _process_and_send_porkify(update: Update, context: ContextTypes.DEFAULT_TYPE, file_id: str) -> None:
-    lang_code = context.user_data.get("language", "en")
-    lang_manager = LangManager()
-    texts = getattr(lang_manager, lang_code)
+    texts = context.lang
     chat_id = update.effective_chat.id
     
     status_msg = await update.message.reply_text(texts.swap_face_process)
